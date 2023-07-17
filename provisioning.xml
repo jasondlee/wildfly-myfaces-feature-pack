@@ -4,7 +4,7 @@
     <default-configs inherit="true"/>
     <packages inherit="true"/>
   </feature-pack>
-  <feature-pack location="org.wildfly:wildfly-myfaces-feature-pack:1.0.0-SNAPSHOT">
+  <feature-pack location="org.wildfly:wildfly-myfaces-feature-pack:1.0.0.Beta1">
     <default-configs inherit="true"/>
     <packages inherit="true"/>
   </feature-pack>

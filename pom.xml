@@ -24,7 +24,7 @@
     </parent>
     <groupId>org.wildfly</groupId>
     <artifactId>wildfly-myfaces-feature-pack-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0.Beta1</version>
     <packaging>pom</packaging>
     <name>MyFaces 4 Support for WildFly - Parent</name>
   
@@ -50,7 +50,7 @@
         <version.org.wildfly.core>21.0.0.Beta2</version.org.wildfly.core>
         <version.org.wildfly.galleon-plugins>6.4.2.Final</version.org.wildfly.galleon-plugins>
         <version.org.wildfly.jar.plugin>9.0.0.Final</version.org.wildfly.jar.plugin>
-        <version.org.wildfly>29.0.0.Beta1-SNAPSHOT</version.org.wildfly>
+        <version.org.wildfly>29.0.0.Final</version.org.wildfly>
 
         <wildfly-extras.repo.scm.connection>git@github.com:wildfly-extras/wildfly-myfaces-feature-pack.git</wildfly-extras.repo.scm.connection>
         <wildfly-extras.repo.scm.url>https://github.com/wildfly-extras/wildfly-myfaces-feature-pack</wildfly-extras.repo.scm.url>

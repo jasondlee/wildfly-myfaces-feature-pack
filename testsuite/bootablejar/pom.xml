@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.wildfly</groupId>
         <artifactId>wildfly-myfaces-feature-pack-testsuite-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0.Beta1</version>
     </parent>
     <artifactId>wildfly-myfaces-feature-pack-bootable-testsuite</artifactId>
     <name>MyFaces 4 Support for WildFly - Bootable Testsuite</name>
