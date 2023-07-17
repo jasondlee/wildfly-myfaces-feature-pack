@@ -49,4 +49,16 @@ public class SubsystemSanityTestCase {
             Assert.fail("MyFaces class not found.");
         }
     }
+
+    @Test
+    public void testThatMojarraIsNotAvailable() {
+        try {
+            // Pretty simple/dumb test to see if a MyFaces shared util class is available. This admittedly fragile,
+            // but it makes a nice, simple smoke test
+            Class.forName("com.sun.faces.util.Util");
+            Assert.fail("Mojarra class found.");
+        } catch (ClassNotFoundException e) {
+            //
+        }
+    }
 }
