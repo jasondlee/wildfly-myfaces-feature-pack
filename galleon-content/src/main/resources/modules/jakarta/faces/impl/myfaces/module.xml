@@ -30,6 +30,7 @@
         <module name="java.desktop"/>
         <module name="java.logging"/>
         <module name="java.naming"/>
+        <module name="java.sql"/>
         <module name="java.xml"/>
 
         <module name="org.jboss.logging"/>
