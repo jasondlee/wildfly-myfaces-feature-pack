@@ -32,93 +32,20 @@
     <packaging>pom</packaging>
 
     <properties>
-        <!-- Arquillian dependency versions -->
-        <version.arquillian_wildfly>${version.org.wildfly}</version.arquillian_wildfly>
-
         <test.bootable.jar.name>test-wildfly-myfaces.jar</test.bootable.jar.name>
         <testLogToFile>true</testLogToFile>
         <plugin.fork.embedded>true</plugin.fork.embedded>
 
-        <!-- Arquillian -->
-        <debug.jvm.args>-Dfoo-bar</debug.jvm.args>
-        <!-- Server arguments. Cannot have a null server argument in ARQ, set a dummy system property -->
-        <jboss.args>-Dfoo-bar</jboss.args>
-
         <!-- Used to provide an absolute location for the distribution under test. -->
         <jboss.dist>${project.basedir}/target/wildfly</jboss.dist>
         <jboss.home>${jboss.dist}</jboss.home>
-
-
-        <!-- IP address defaults. -->
-        <node0>127.0.0.1</node0>
-        <node1>127.0.0.1</node1>
-        <mcast>230.0.0.4</mcast> <!-- Default multicast address. -->
-        <mcast.ttl>0</mcast.ttl> <!-- Multicast TTL. -->
-        <port-offset>0</port-offset>
-
-        <!-- IP stack configs. -->
-        <jvm.args.ip>-Djava.net.preferIPv4Stack=true -Djava.net.preferIPv6Addresses=false</jvm.args.ip>
-        <jvm.args.ip.server>${jvm.args.ip}
-            -Djboss.bind.address=${node0}
-            -Djboss.bind.address.unsecure=${node0}
-            -Djboss.bind.address.private=${node0}
-            -Djboss.bind.address.management=${node0}
-            -Djboss.default.multicast.address=${mcast}
-        </jvm.args.ip.server>
-        <jvm.args.ip.client>${jvm.args.ip}</jvm.args.ip.client>
-
-        <!-- =================== -->
-
-        <!-- Additional JVM args, like those for EC2. -->
-        <jvm.args.other>-server</jvm.args.other>
-
-        <!-- Logging config -->
-        <testLogToFile>true</testLogToFile>
-
-        <!-- Timeout ratios. 100 will leave the timeout as it was coded. -->
-        <timeout.factor>100</timeout.factor>
-        <jvm.args.timeouts>-Dts.timeout.factor=${timeout.factor}</jvm.args.timeouts>
-
-        <!-- Common surefire arguments -->
-        <surefire.memory.args>-Xmx512m -XX:MetaspaceSize=128m</surefire.memory.args>
-        <surefire.jpda.args />
-        <as.debug.port>8787</as.debug.port>
-        <modular.jdk.testsuite.args />
-        <surefire.system.args>${modular.jdk.testsuite.args} ${surefire.memory.args} ${surefire.jpda.args} -Djboss.dist=${jboss.dist} -Dmaven.repo.local=${settings.localRepository}</surefire.system.args>
-        <extra.server.jvm.args />
-        <!-- Hook to control forked process timeout via -D. Default value of 0 means no timeout -->
-        <surefire.forked.process.timeout>0</surefire.forked.process.timeout>
-
-        <!-- If servers should be killed before the test suite is run-->
-        <org.wildfly.test.kill-servers-before-test>false</org.wildfly.test.kill-servers-before-test>
-
-        <!-- Arquillian dependency versions -->
-        <version.arquillian_wildfly>${version.org.wildfly}</version.arquillian_wildfly>
+        <jboss.args>-Dfoo=bar</jboss.args>
 
         <!-- Don't try to deploy the testsuite modules because they don't build jars -->
         <maven.deploy.skip>true</maven.deploy.skip>
 
         <!-- used to enable trace logging for test suite runs -->
         <trace>none</trace>
-
-        <jvm.args.dirs>
-            -Djboss.dist=${jboss.dist}
-            -Djava.io.tmpdir=${basedir}/target
-        </jvm.args.dirs>
-
-        <modular.jdk.args>
-            --add-exports=java.base/sun.nio.ch=ALL-UNNAMED
-            --add-exports=jdk.unsupported/sun.reflect=ALL-UNNAMED
-            --add-exports=jdk.unsupported/sun.misc=ALL-UNNAMED
-            --add-modules=java.se
-        </modular.jdk.args>
-
-        <!--
-            Used in arquillian.xml - arguments for all JBoss AS instances.
-            System properties are duplicated here until ARQ-647 is implemented.
-        -->
-        <server.jvm.args>${surefire.system.args} ${jvm.args.ip.server} ${jvm.args.other} ${jvm.args.timeouts} -Dnode0=${node0} -Dnode1=${node1} -Dmcast=${mcast} -Dmcast.ttl=${mcast.ttl} ${jvm.args.dirs} ${extra.server.jvm.args} ${debug.jvm.args}</server.jvm.args>
-        <cli.jvm.args>${modular.jdk.args} -Dmaven.repo.local=${settings.localRepository}</cli.jvm.args>
 
         <!-- Skip deploying tests -->
         <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
@@ -135,33 +62,6 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <configuration>
                     <skip>true</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <failIfNoTests>false</failIfNoTests>
-                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
-                    <failIfNoTests>false</failIfNoTests>
-                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
-                    <systemPropertyVariables>
-                        <wildfly.bootable.jar>true</wildfly.bootable.jar>
-                        <management.address>${management.address}</management.address>
-
-                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                        <jboss.dist>${jboss.dist}</jboss.dist>
-                        <jboss.home>${basedir}/target/wildfly</jboss.home>
-                        <jboss.args>${jboss.args}</jboss.args>
-                        <module.path>${jboss.dist}/modules${path.separator}${basedir}/target/modules</module.path>
-                        <org.wildfly.test.kill-servers-before-test>${org.wildfly.test.kill-servers-before-test}</org.wildfly.test.kill-servers-before-test>
-                    </systemPropertyVariables>
-                    <!-- Arquillian's config files. -->
-                    <additionalClasspathElements combine.children="append">
-                        <additionalClasspathElement>${basedir}/src/test/config/arq</additionalClasspathElement>
-                    </additionalClasspathElements>
-                    <argLine>${surefire.system.args}</argLine>
-                    <trimStackTrace>false</trimStackTrace>
                 </configuration>
             </plugin>
         </plugins>

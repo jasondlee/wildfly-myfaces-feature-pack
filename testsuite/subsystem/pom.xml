@@ -59,18 +59,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.wildfly.arquillian</groupId>
-            <artifactId>wildfly-arquillian-container-managed</artifactId>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-core-test-runner</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -80,15 +70,6 @@
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>server-provisioning</id>
-                        <goals>
-                            <goal>provision</goal>
-                        </goals>
-                        <phase>compile</phase>
-                    </execution>
-                </executions>
                 <configuration>
                     <feature-packs>
                         <feature-pack>
@@ -102,29 +83,128 @@
                             <version>${project.version}</version>
                         </feature-pack>
                     </feature-packs>
-                    <layers>
-                        <layer>management</layer>
-                        <layer>web-server</layer>
-                        <!-- Layers from this FP  -->
-                        <layer>myfaces</layer>
-                    </layers>
-                    <galleon-options>
-                        <jboss-fork-embedded>true</jboss-fork-embedded>
-                    </galleon-options>
-                    <provisioning-dir>${jboss.dist}</provisioning-dir>
-                    <log-provisioning-time>true</log-provisioning-time>
-                    <offline>true</offline>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>base-server</id>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                        <phase>compile</phase>
+                        <configuration>
+                            <layers>
+                                <layer>management</layer>
+                                <layer>myfaces</layer>
+                            </layers>
+                            <galleon-options>
+                                <jboss-fork-embedded>true</jboss-fork-embedded>
+                            </galleon-options>
+                            <bootable-jar>false</bootable-jar>
+                            <provisioning-dir>${jboss.dist}</provisioning-dir>
+                            <log-provisioning-time>true</log-provisioning-time>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-bootable-jar</id>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                        <phase>compile</phase>
+                        <configuration>
+                            <layers>
+                                <layer>management</layer>
+                                <layer>myfaces</layer>
+                            </layers>
+                            <galleon-options>
+                                <jboss-fork-embedded>${plugin.fork.embedded}</jboss-fork-embedded>
+                            </galleon-options>
+                            <bootable-jar>true</bootable-jar>
+                            <provisioning-dir>server</provisioning-dir>
+                            <bootable-jar-name>${test.bootable.jar.name}</bootable-jar-name>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-preview-bootable-jar</id>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                        <phase>compile</phase>
+                        <configuration>
+                            <layers>
+                                <layer>management</layer>
+                                <layer>myfaces</layer>
+                            </layers>
+                            <galleon-options>
+                                <jboss-fork-embedded>${plugin.fork.embedded}</jboss-fork-embedded>
+                            </galleon-options>
+                            <bootable-jar>true</bootable-jar>
+                            <provisioning-dir>preview-server</provisioning-dir>
+                            <bootable-jar-name>${test.preview.bootable.jar.name}</bootable-jar-name>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.5</version>
                 <configuration>
-                    <systemPropertyVariables combine.children="append">
-                        <jboss.install.dir>${jboss.dist}</jboss.install.dir>
-                        <server.jvm.args>${server.jvm.args}</server.jvm.args>
+                    <failIfNoTests>false</failIfNoTests>
+                    <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>
+                    <systemPropertyVariables>
+                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                        <org.wildfly.test.kill-servers-before-test>${org.wildfly.test.kill-servers-before-test}</org.wildfly.test.kill-servers-before-test>
                     </systemPropertyVariables>
+                    <argLine>${surefire.system.args}</argLine>
+                    <trimStackTrace>false</trimStackTrace>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>default-test</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <server.startup.timeout>3000</server.startup.timeout>
+                                <wildfly.bootable.jar>false</wildfly.bootable.jar>
+                                <jboss.dist>${jboss.dist}</jboss.dist>
+                                <jboss.home>${jboss.dist}</jboss.home>
+                                <jboss.args>${jboss.args}</jboss.args>
+                                <jboss.install.dir>${jboss.dist}</jboss.install.dir>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>bootable-jar-test</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <wildfly.bootable.jar>true</wildfly.bootable.jar>
+                                <wildfly.bootable.jar.jar>${project.build.directory}/${test.bootable.jar.name}</wildfly.bootable.jar.jar>
+                                <wildfly.bootable.jar.install.dir>${project.build.directory}/server</wildfly.bootable.jar.install.dir>
+                                <jboss.home>${project.build.directory}/server</jboss.home>
+                                <java.io.tmpdir>${project.build.directory}/bootable-tmp</java.io.tmpdir>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>preview-bootable-jar-test</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <wildfly.bootable.jar>true</wildfly.bootable.jar>
+                                <wildfly.bootable.jar.jar>${project.build.directory}/${test.preview.bootable.jar.name}</wildfly.bootable.jar.jar>
+                                <wildfly.bootable.jar.install.dir>${project.build.directory}/preview-server</wildfly.bootable.jar.install.dir>
+                                <jboss.home>${project.build.directory}/preview-server</jboss.home>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
