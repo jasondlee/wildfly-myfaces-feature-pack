@@ -58,9 +58,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:${wildfly-extras.repo.scm.connection}</connection>
-        <developerConnection>scm:git:${wildfly-extras.repo.scm.connection}</developerConnection>
-        <url>${wildfly-extras.repo.scm.url}</url>
+        <connection>scm:git:${wildfly.repo.scm.connection}</connection>
+        <developerConnection>scm:git:${wildfly.repo.scm.connection}</developerConnection>
+        <url>${wildfly.repo.scm.url}</url>
         <tag>2.0.3.Final-SNAPSHOT</tag>
     </scm>
 
@@ -102,12 +102,12 @@
         <nexus.repository.staging>wildfly-staging</nexus.repository.staging>
         <nexus.staging.tag>wildfly-myfaces-feature-pack-${project.version}</nexus.staging.tag>
 
-        <wildfly-extras.repo.scm.connection>
-            git@github.com:wildfly-extras/wildfly-myfaces-feature-pack.git
-        </wildfly-extras.repo.scm.connection>
-        <wildfly-extras.repo.scm.url>
-            https://github.com/wildfly-extras/wildfly-myfaces-feature-pack
-        </wildfly-extras.repo.scm.url>
+        <wildfly.repo.scm.connection>
+            git@github.com:wildfly/wildfly-myfaces-feature-pack.git
+        </wildfly.repo.scm.connection>
+        <wildfly.repo.scm.url>
+            https://github.com/wildfly/wildfly-myfaces-feature-pack
+        </wildfly.repo.scm.url>
     </properties>
 
     <repositories>
