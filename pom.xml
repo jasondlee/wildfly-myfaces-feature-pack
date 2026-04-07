@@ -217,12 +217,6 @@
                 <artifactId>junit</artifactId>
                 <version>${version.junit}</version>
             </dependency>
-            <dependency>
-                <groupId>org.wildfly.core</groupId>
-                <artifactId>wildfly-core-test-runner</artifactId>
-                <version>${version.org.wildfly.core}</version>
-                <scope>test</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
