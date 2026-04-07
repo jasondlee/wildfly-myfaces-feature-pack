@@ -66,10 +66,10 @@ You need to include the MyFaces feature pack and layers in the Maven Plugin conf
 ...
 <feature-packs>
     <feature-pack>
-        <location>org.wildfly:wildfly-galleon-pack:29.0.0.Final</location>
+        <location>org.wildfly:wildfly-galleon-pack:39.0.1.Final</location>
     </feature-pack>
     <feature-pack>
-        <location>org.wildfly:wildfly-myfaces-feature-pack:1.0.0.Final</location>
+        <location>org.wildfly:wildfly-myfaces-feature-pack:2.0.3.Final</location>
     </feature-pack>
 </feature-packs>
 <layers>
