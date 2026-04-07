@@ -2,8 +2,8 @@ Galleon Feature Packs for integrating MyFaces into WildFly and WildFly Preview
 ==================================================
 
 This feature pack for WildFly provides MyFaces 4.x support for WildFly. It will allow an administrator to deploy applications
-that depend upon -- or simply prefer -- MyFaces, which is configured as the default Jakarta Faces implementation once the 
-feature pack is installed. 
+that depend upon -- or simply prefer -- MyFaces, which is configured as the default Jakarta Faces implementation once the
+feature pack is installed.
 
 The MyFaces feature pack is to be provisioned along with the WildFly Galleon feature pack.
 
@@ -25,7 +25,7 @@ Provisioning of the MyFaces layer can be done in multiple ways according to the 
 ## Provisioning using CLI tool
 
 You can download the latest Galleon CLI tool from the Galleon GitHub project [releases](https://github.com/wildfly/galleon/releases).
- 
+
 You need to define a Galleon provisioning configuration file such as:
 
 ```
@@ -66,10 +66,10 @@ You need to include the MyFaces feature pack and layers in the Maven Plugin conf
 ...
 <feature-packs>
     <feature-pack>
-        <location>org.wildfly:wildfly-galleon-pack:29.0.0.Final</location>
+        <location>org.wildfly:wildfly-galleon-pack:39.0.1.Final</location>
     </feature-pack>
     <feature-pack>
-        <location>org.wildfly:wildfly-myfaces-feature-pack:1.0.0.Final</location>
+        <location>org.wildfly:wildfly-myfaces-feature-pack:2.0.3.Final</location>
     </feature-pack>
 </feature-packs>
 <layers>
