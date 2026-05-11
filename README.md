@@ -1,4 +1,4 @@
-Galleon Feature Packs for integrating MyFaces into WildFly and WildFly Preview
+Galleon Feature Packs for integrating MyFaces 4.0 into WildFly and WildFly Preview
 ==================================================
 
 This feature pack for WildFly provides MyFaces 4.x support for WildFly. It will allow an administrator to deploy applications
@@ -31,11 +31,11 @@ You need to define a Galleon provisioning configuration file such as:
 ```
 <?xml version="1.0" ?>
 <installation xmlns="urn:jboss:galleon:provisioning:3.0">
-  <feature-pack location="org.wildfly:wildfly-galleon-pack:29.0.0.Final">
+  <feature-pack location="org.wildfly:wildfly-ee-10-feature-pack:40.0.0.Beta1">
     <default-configs inherit="true"/>
     <packages inherit="true"/>
   </feature-pack>
-  <feature-pack location="org.wildfly:wildfly-myfaces-feature-pack:1.0.0.Final-SNAPSHOT">
+  <feature-pack location="org.wildfly:wildfly-myfaces-feature-pack:2.0.4.Final-SNAPSHOT">
     <default-configs inherit="true"/>
     <packages inherit="true"/>
   </feature-pack>
@@ -66,10 +66,10 @@ You need to include the MyFaces feature pack and layers in the Maven Plugin conf
 ...
 <feature-packs>
     <feature-pack>
-        <location>org.wildfly:wildfly-galleon-pack:39.0.1.Final</location>
+        <location>org.wildfly:wildfly-ee-10-feature-pack:40.0.0.Beta1</location>
     </feature-pack>
     <feature-pack>
-        <location>org.wildfly:wildfly-myfaces-feature-pack:2.0.3.Final</location>
+        <location>org.wildfly:wildfly-myfaces-feature-pack:2.0.4.Final</location>
     </feature-pack>
 </feature-packs>
 <layers>

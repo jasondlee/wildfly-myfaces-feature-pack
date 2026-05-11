@@ -24,8 +24,8 @@
     </parent>
 
     <artifactId>wildfly-myfaces-feature-pack</artifactId>
-    <name>MyFaces 4 Support for WildFly - Feature Pack</name>
-    <description>MyFaces 4 Support for WildFly - Feature Pack</description>
+    <name>MyFaces 4.0 Support for WildFly - Feature Pack</name>
+    <description>MyFaces 4.0 Support for WildFly - Feature Pack</description>
 
     <packaging>pom</packaging>
 

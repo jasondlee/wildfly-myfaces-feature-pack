@@ -8,8 +8,8 @@
     </parent>
 
     <artifactId>wildfly-myfaces-injection</artifactId>
-    <name>MyFaces 4 Support for WildFly - Injection Support</name>
-    <description>MyFaces 4 Support for WildFly - Injection Support</description>
+    <name>MyFaces 4.0 Support for WildFly - Injection Support</name>
+    <description>MyFaces 4.0 Support for WildFly - Injection Support</description>
 
     <dependencies>
         <dependency>

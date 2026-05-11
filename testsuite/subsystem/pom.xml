@@ -26,7 +26,7 @@
 
     <artifactId>wildfly-myfaces-feature-pack-testsuite-subsystem</artifactId>
 
-    <name>MyFaces 4 Support for WildFly - Subsystem Testsuite</name>
+    <name>MyFaces 4.0 Support for WildFly - Subsystem Testsuite</name>
 
     <dependencies>
         <dependency>
@@ -74,7 +74,7 @@
                     <feature-packs>
                         <feature-pack>
                             <groupId>org.wildfly</groupId>
-                            <artifactId>wildfly-galleon-pack</artifactId>
+                            <artifactId>wildfly-ee-10-feature-pack</artifactId>
                             <version>${version.org.wildfly}</version>
                         </feature-pack>
                         <feature-pack>
@@ -147,7 +147,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.5.5</version>
                 <configuration>
                     <failIfNoTests>false</failIfNoTests>
                     <redirectTestOutputToFile>${testLogToFile}</redirectTestOutputToFile>

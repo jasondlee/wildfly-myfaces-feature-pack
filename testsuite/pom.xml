@@ -26,8 +26,8 @@
     </parent>
 
     <artifactId>wildfly-myfaces-feature-pack-testsuite-parent</artifactId>
-    <name>MyFaces 4 Support for WildFly - Testsuite Parent</name>
-    <description>MyFaces 4 Support for WildFly - Testsuite Parent</description>
+    <name>MyFaces 4.0 Support for WildFly - Testsuite Parent</name>
+    <description>MyFaces 4.0 Support for WildFly - Testsuite Parent</description>
 
     <packaging>pom</packaging>
 
