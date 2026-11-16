@@ -1,11 +1,11 @@
-Galleon Feature Packs for integrating MyFaces 4.1 into WildFly and WildFly Preview
+Galleon Feature Packs for integrating MyFaces 4.x into WildFly and WildFly Preview
 ==================================================
 
-This feature-pack for WildFly provides MyFaces 4.x support for WildFly. It will allow an administrator to deploy applications
-that depend upon -- or simply prefer -- MyFaces, which is configured as the default Jakarta Faces implementation once the
-feature-pack is installed.
+This feature-pack for WildFly provides MyFaces 4.x support for WildFly. It will allow an 
+administrator to deploy applications that depend upon -- or simply prefer -- MyFaces, which 
+is configured as the default Jakarta Faces implementation once the feature-pack is installed.
 
-The MyFaces feature pack is to be provisioned along with the WildFly Galleon feature-pack.
+The MyFaces feature-pack is to be provisioned along with the WildFly Galleon feature-pack.
 
 Resources:
 
@@ -16,6 +16,10 @@ Feature pack compatible with WildFly
 ============================
 
 The Maven coordinates to use is: `org.wildfly:wildfly-myfaces-feature-pack:<version>`
+
+> [!NOTE]
+> The `master` branch -- version 3.x -- is now targeting Jakarta EE 11 and MyFaces 4.1. Users 
+> still needing EE 10 and MyFaces 4.0 support should use 2.x. 
 
 Using the MyFaces feature pack
 ==========================
